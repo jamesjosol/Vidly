@@ -1,0 +1,174 @@
+﻿body {
+    padding-bottom: 20px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+  footer {
+    max-width: 540px;
+
+  }
+}
+@media (min-width: 768px) {
+    footer {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    footer {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    footer {
+        max-width: 1140px;
+    }
+}
+@media (min-width: 1400px) {
+    footer {
+        max-width: 1320px;
+    }
+}
+/* Set padding to keep content from hitting the edges */
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.input-validation-error, input.error {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+    .input-validation-error:focus {
+        border-color: #f04124;
+        box-shadow: 0 0 0 0.25rem rgba(240, 65, 36, 0.25);
+    }
+
+
+.field-validation-error, label.error {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #f04124;
+}
+
+.checkbox-lg .custom-control-label::before,
+.checkbox-lg .custom-control-label::after {
+    top: .8rem;
+    width: 1.55rem;
+    height: 1.55rem;
+}
+
+.checkbox-lg .custom-control-label {
+    padding-top: 13px;
+    padding-left: 6px;
+}
+
+
+.checkbox-xl .custom-control-label::before,
+.checkbox-xl .custom-control-label::after {
+    top: 1.2rem;
+    width: 1.85rem;
+    height: 1.85rem;
+}
+
+.checkbox-xl .custom-control-label {
+    padding-top: 23px;
+    padding-left: 10px;
+}
+
+.flBtnCntr {
+    display: inline-flex;
+    top: 50px;
+    left: 50px;
+}
+
+.flBtnBox {
+    outline: 0;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer
+}
+
+.flBtnBox.big {
+    background-color: #2978d3;
+    font-size: 1em;
+    height: 40px;
+    width: 40px;
+    transition: .3s;
+}
+
+.flBtnBox.small {
+    animation: showBtn 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform: scale(0);
+    height: 35px;
+    width: 35px;
+}
+
+.flBtnBox.small:nth-child(2) {
+    animation-delay: 150ms
+}
+
+.flBtnBox.small:nth-child(3) {
+    animation-delay: 300ms
+}
+
+@keyframes showBtn {
+    0% {
+        transform: scale(0)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.flBtnBox.big:hover {
+    box-shadow: 0 0 10px rgba(41, 120, 211, 0.4);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: scale(1.1);
+    transform: rotate(45deg);
+}
+
+.flBtnBox.small:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.flBtns {
+    left: 100%;
+    top: 0;
+    bottom: 0;
+    display: none;
+
+    align-items: center;
+}
+
+.flBtnCntr:hover .flBtns {
+    display: inline-flex
+}
+
+.tdFixedWidth {
+    width: 6em;
+}

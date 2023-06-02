@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Vidly.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3 class="py-3">Movies</h3>
+
+@Html.ActionLink("New", "New", "Movies", new { area = "" }, new { @class = "btn btn-primary my-2 px-4" })
+@*<div class="flBtnCntr">
+        <button class="flBtnBox big"><i class='fas fa-gear'></i></button>
+        <div class="flBtns">
+            <a href='/movies/edit/' class='flBtnBox small text-decoration-none btn btn-primary mx-2'><i class='far fa-pen-to-square'></i></a>
+            <button class='flBtnBox small btn btn-danger js-delete' data-movie-id=" + data + "><i class='fas fa-trash-alt'></i></button>
+        </div>
+    </div>*@
+<table id="movies" class="table table-hover">
+    <thead class="bg-primary text-white fs-5">
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@Html.Partial("_DeleteToastView")
+@Scripts.Render("~/bundles/movieIndex")

@@ -1,0 +1,120 @@
+﻿@using Vidly.Models
+@model Vidly.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="py-3">Customers</h3>
+
+<!--@if (Model.Customers.Count == 0)
+{
+    <h4>We don't have any customer yet.</h4>
+}
+else
+{
+    @Html.ActionLink("New", "New", "Customers", new { area = "" }, new { @class = "btn btn-primary my-2 px-4" })
+    <table id="customers" class="table table-hover">
+        <thead class="bg-primary text-white fs-5">
+            <tr>
+                <th>Customers</th>
+                <th>Membership Type</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>-->
+@*@foreach (var customer in Model.Customers)
+    {
+        <tr>
+            <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, new { @class = "text-decoration-none" })</td>
+            <td>@customer.MembershipType.Name</td>
+            <td class="text-center">
+                <a href="@Url.Action("Edit", "Customers", new { id = customer.Id })" class="btn btn-primary mx-2">
+                    <i class="far fa-pen-to-square"></i>
+                </a>
+                <button data-customer-id="@customer.Id" class="btn btn-danger js-delete"><i class="fas fa-trash-alt"></i></button>
+            </td>
+        </tr>
+    }*@
+
+
+<!--</tbody>
+    </table>
+
+}-->
+
+<table id="customers" class="table table-hover">
+    <thead class="bg-primary text-white fs-5">
+        <tr>
+            <th>Customers</th>
+            <th>Membership Type</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+
+            $("#customers").on("click", ".js-delete", function () {
+
+                var button = $(this);
+                var row = button.closest('tr');
+                var anchor = row.find('a');
+                var name = anchor.text();
+
+                bootbox.confirm({
+                    message: '<div class="text-center"><p class=""><i style="font-size: 4em;" class="fa fa-circle-exclamation text-danger"></i></p> <h5 style="margin-top:-2%; color: rgb(46, 46, 46)">Delete Customer</h5><p class="container">Are you sure you want to delete ' + name + '?</p></div>',
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> Cancel'
+                        },
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> OK'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                url: "/api/customers/" + button.attr("data-customer-id"),
+                                method: "DELETE",
+                                success: function () {
+                                    button.parents("tr").remove();
+                                }
+                            });
+                        }
+                    }
+                });
+                $(".modal-footer").css("border-top", "none");
+            });
+        });
+    </script>
+}

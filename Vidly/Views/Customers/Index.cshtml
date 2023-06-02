@@ -1,0 +1,23 @@
+﻿@using Vidly.Models
+@model Vidly.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="py-3">Customers</h3>
+
+@Html.ActionLink("New", "New", "Customers", new { area = "" }, new { @class = "btn btn-primary my-2 px-4" })
+<table id="customers" class="table table-hover">
+    <thead class="bg-primary text-white fs-5">
+        <tr>
+            <th>Customers</th>
+            <th>Membership Type</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+@Html.Partial("_DeleteToastView")
+@Scripts.Render("~/bundles/customerIndex")

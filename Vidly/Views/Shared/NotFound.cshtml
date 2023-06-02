@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "NotFound";
+}
+<style>
+    /* Add some style to the page */
+    body {
+        background-color: #1a202c; /* set the background color to a dark gray */
+        font-family: sans-serif;
+    }
+
+    .error-container {
+        text-align: center; /* center the text within the container */
+        color: #a0aec0; /* set the text color to white */
+        margin-top: 5%;
+    }
+
+    h1 {
+        font-size: 48px;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        font-weight: 100;
+        padding-bottom: 0.5em;
+    }
+
+    p {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid #069;
+        border-radius: 5px;
+        color: #069;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+        .btn-back:hover {
+            background-color: #069;
+            color: #fff;
+        }
+
+    .fa-frown {
+        font-size: 1.2em;
+    }
+</style>
+<div class="error-container">
+    <h1>404 - Page Not Found</h1>
+    <p>Sorry, the page you are looking for could not be found. <i class="fas fa-frown"></i></p>
+
+    <p>
+        @*@Html.ActionLink("Go back to home page", "Index", "Home", new { area = "" }, new { @class = "btn-back" })*@
+        
+        <a href="javascript:void(0);" id="backLink" class="btn-back">Go back</a>
+    </p>
+</div>
+
+<script type="text/javascript">
+    $(document).on('click', '#backLink', function () {
+        history.go(-1);
+    });
+</script>

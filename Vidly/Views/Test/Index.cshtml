@@ -1,0 +1,93 @@
+﻿@model Vidly.Models.Customer
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-3">
+            <table id="customers" class="table table-hover">
+                <thead class="bg-primary text-white fs-5">
+                <tr>
+                    <th>Customers</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-8" id="customer-info">
+
+    </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 – Classic editor</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+</head>
+<body>
+<h1>Classic editor</h1>
+<div id="editor">
+    <p>This is some sample content.</p>
+</div>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+</body>
+</html>
+
+
+@section scripts
+{
+    <script>
+      
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+
+        $(document).ready(function () {
+
+            $(document).on('click', '.link-customer', function (event) {
+            
+                $.get('/test/customer_view', { customerid: $(this).data("customerid") }, function (data) {
+                    $("#customer-info").html(data);
+                });
+
+                event.preventDefault();
+
+            });
+
+            var table = $("#customers").DataTable({
+                "lengthChange": false,
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return "<a href='#' data-customerid='" + customer.id + "' class='text-decoration-none link-customer'> " + customer.name + "</a>";
+                        }
+                    }
+                ]
+            });
+            $(".dataTables_filter").addClass("float-end");
+            $(".dataTables_filter input").removeClass("form-control-sm");
+            $(".dataTables_info").css("font-size", "0.8em");
+        });
+    </script>
+}

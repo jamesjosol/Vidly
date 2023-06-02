@@ -1,0 +1,47 @@
+﻿@model Vidly.ViewModel.CustomerFormViewModel
+@{
+    ViewBag.Title = "CustomerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="py-3">CustomerForm</h2>
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+
+    <div class="form-floating mb-3">
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control", placeholder = "Name" })
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+    </div>
+
+
+
+    <div class="form-floating mb-3">
+        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker", @type = "date" })
+        @Html.LabelFor(m => m.Customer.BirthDate)
+        @Html.ValidationMessageFor(m => m.Customer.BirthDate)
+    </div>
+
+    <div class="form-floating mb-3">
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control form-select" })
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter, new { @style = "transform: scale(1.3); margin-right: 0.8em;" }) Subscribe to Newsletter?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Customer.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
